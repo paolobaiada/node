@@ -12,26 +12,26 @@ function luckyDraw(player) {
   });
 }
 
-const getResults = async () => {
+const getResults = async (callback) => {
   try {
-    const data = await luckyDraw("Tina");
+    const data = await callback("Tina");
     console.log(data);
   } catch (error) {
     console.log(error.message);
   }
   try {
-    const data2 = await luckyDraw("Jorge");
+    const data2 = await callback("Jorge");
   console.log(data2);
   } catch (error) {
     console.log(error.message)
   }
   
 try {
-    const data3 = await luckyDraw("Julien");
+    const data3 = await callback("Julien");
   console.log(data3);
 } catch (error) {
     console.log(error.message)
 }
   
 };
-getResults();
+getResults(luckyDraw);
