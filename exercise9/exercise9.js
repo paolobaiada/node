@@ -16,22 +16,14 @@ const getResults = async (callback) => {
   try {
     const data = await callback("Tina");
     console.log(data);
+     const data2 = await callback("Jorge");
+  console.log(data2);
+      const data3 = await callback("Julien");
+  console.log(data3);
   } catch (error) {
     console.log(error.message);
   }
-  try {
-    const data2 = await callback("Jorge");
-  console.log(data2);
-  } catch (error) {
-    console.log(error.message)
-  }
-  
-try {
-    const data3 = await callback("Julien");
-  console.log(data3);
-} catch (error) {
-    console.log(error.message)
-}
+ 
   
 };
 getResults(luckyDraw);
