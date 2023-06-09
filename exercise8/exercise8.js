@@ -1,4 +1,4 @@
-const players = ['Joe','Caroline','Sabrina']
+
  function luckyDraw(player) {
     return new Promise((resolve, reject) => {
       const win = Boolean(Math.round(Math.random()));
@@ -19,17 +19,11 @@ const players = ['Joe','Caroline','Sabrina']
    .then((result) => {
      console.log(result);
    })
-   .catch((error) => {
-     console.log(error.message);
-   })
    .then(() => {
      return luckyDraw("Caroline");
    })
    .then((result) => {
      console.log(result);
-   })
-   .catch((error) => {
-     console.log(error.message);
    })
    .then(() => {
      return luckyDraw("Sabrina");
