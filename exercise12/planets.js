@@ -32,9 +32,9 @@ const updateById =(req,res) => {
   const update = req.body
   planets = planets.map((planet) => {
     if (planet.id === Number(id)) {
-      return {...planets,...update}
+      return  {...planet,...update}
     }
-    return planets
+    return planet
    } )
   res.status(200).json({msg: "value changed", data: planets})
 }
