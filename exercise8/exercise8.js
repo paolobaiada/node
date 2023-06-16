@@ -18,18 +18,14 @@
   luckyDraw("Joe")
    .then((result) => {
      console.log(result);
-   })
-   .then(() => {
      return luckyDraw("Caroline");
    })
    .then((result) => {
-     console.log(result);
-   })
-   .then(() => {
-     return luckyDraw("Sabrina");
+       console.log(result);
+       return luckyDraw("Sabrina");
    })
    .then((result) => {
-     console.log(result);
+   console.log(result);
    })
    .catch((error) => {
      console.log(error.message);
