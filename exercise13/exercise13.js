@@ -1,5 +1,5 @@
 const express = require('express')
-const {planets,getAll,getoneById,create,updateById,deleteById} = require('./planets.js')
+const {getAll,getoneById,create,updateById,deleteById} = require('./planets.js')
 
 
 const app = express()
@@ -24,6 +24,8 @@ app.delete('/api/planets/:id',deleteById)
 
 
 
-app.listen(3000)
+app.listen(3000, () => {
+    console.log("listening")
+})
 
  
