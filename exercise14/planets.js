@@ -1,13 +1,14 @@
 const pgPromise = require("pg-promise")();
 
-const db = pgPromise("postgres://postgres:postgres@localhost:5432/planets");
+const db = pgPromise("postgres://postgres:postgres@localhost:5432/planet");
 const setUpDb = async () => {
   await db.none(`
   DROP TABLE IF EXISTS planets;
 
     CREATE TABLE planets(
         id SERIAL PRIMARY KEY,
-        name TEXT NOT NULL
+        name TEXT NOT NULL,
+        image TEXT
     );
     `);
   await db.none(`INSERT INTO planets (name) VALUES ('Earth')`);
@@ -50,8 +51,18 @@ const deleteById = async (req, res) => {
 };
 
 const createImage = async (req,res) => {
-    console.log(req.file)
+    const {id} = req.params;
+    const file = req.file?.path;
+    
+
+    if(file){
+       await db.none(`UPDATE planets SET image=$1 WHERE id=$2`, [file,id])
+       res.status(200).json({msg: "upload successfull"})
+    }
+    else res.status(400).json({msg:"upload failed"})
+    
 }
+
 module.exports = {
   getAll,
   getoneById,
