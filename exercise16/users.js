@@ -17,6 +17,8 @@ res.status(200).json({id: user.id,username,token})
 }
 else res.status(400).json({msg: "username or password incorrect"})
 }
+
+
 const signup = async (req,res) => {
 const {username,password} = req.body
 const user = await db.oneOrNone(`SELECT * FROM users WHERE username=$1`,username)
@@ -31,4 +33,10 @@ else {
     res.status(201).json({id,msg: "user created"})
 }
 }
-module.exports = {login,signup}
+
+const logout = async (req,res) => {
+    const user = req.user
+    await db.none(`UPDATE user SET token=$2 WHERE id=$1`,[user?.id,null])
+    res.status(200).json({msg:"logout sucessfull"})
+}
+module.exports = {login,signup,logout}
