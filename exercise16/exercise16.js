@@ -1,7 +1,7 @@
 const express = require("express")
 const db = require("./db")
 const bodyParser = require("body-parser")
-const { login } = require("./users")
+const { login, signup } = require("./users")
 
 
 
@@ -22,6 +22,8 @@ app.post("/users", async (req,res) => {
 
 
 app.post("/users/login",login)
+
+app.post("/users/signup",signup)
 
 app.get("/:id", async (req,res) => {
     const {id} = req.params

@@ -2,6 +2,7 @@ const db = require("./db")
 require('dotenv').config()
 const jwt = require("jsonwebtoken")
 const {SECRET} = process.env
+
 const login = async (req,res) => {
 const {username,password} = req.body
 const user = await db.one(`SELECT * FROM users WHERE username=$1`,username)
@@ -16,4 +17,18 @@ res.status(200).json({id: user.id,username,token})
 }
 else res.status(400).json({msg: "username or password incorrect"})
 }
-module.exports = {login}
+const signup = async (req,res) => {
+const {username,password} = req.body
+const user = await db.oneOrNone(`SELECT * FROM users WHERE username=$1`,username)
+if(user){
+    res.status(409).json({msg:"username in use"})
+}
+else {
+    const {id} = await db.one(
+        `INSERT INTO users (username,password) VALUES ($1,$2) RETURNING id`,
+        [username,password]
+    );
+    res.status(201).json({id,msg: "user created"})
+}
+}
+module.exports = {login,signup}
